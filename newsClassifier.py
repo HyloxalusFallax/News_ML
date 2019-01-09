@@ -92,19 +92,6 @@ for word in dict:
 			break
 	counter += 1
 
-bow = []
-print(len(cleaned_headlines))
-for i in range(0, len(cleaned_headlines)):
-	if (i % 1000 == 0):
-		print(i)
-	vect = []
-	for word in most_common:
-		vect.append(cleaned_headlines[i].count(word[0]) + cleaned_texts[i].count(word[0]))
-	bow.append(vect)
-		
-with open('data.txt', 'w') as f:
-    json.dump(bow, f)
-
 cleaned_target_headlines = []
 for headline in target_headlines:
 	cleaned_headline = list(filter(None, re.split("[, \-!?:;\.«»\'\"\—\n]+", headline)));
@@ -115,16 +102,6 @@ for text in target_texts:
 	cleaned_text = list(filter(None, re.split("[, \-!?:;\.«»\'\"\—\n]+", text)));
 	cleaned_text = list(filter(lambda x: not (x in stopwords), cleaned_text));	
 	cleaned_target_texts.append(cleaned_text)
-
-bow = []
-print(len(cleaned_target_headlines))
-for i in range(0, len(cleaned_target_headlines)):
-	if (i % 1000 == 0):
-		print(i)
-	vect = []
-	for word in most_common:
-		vect.append(cleaned_target_headlines[i].count(word[0]) + cleaned_target_texts[i].count(word[0]))
-	bow.append(vect)
 
 test_data = data[-1000:]
 train_data = data[:-1000]
